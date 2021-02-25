@@ -6,6 +6,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\ProdukController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +38,15 @@ Route::post('profile', [ProfileController::class , 'store'])->middleware(['auth'
 Route::get('history', [HistoryController::class , 'index'])->middleware(['auth']);
 Route::get('history/{id}', [HistoryController::class , 'show'])->middleware(['auth']);
 
+Route::get('/admin', function () {
+    return view('dashboard.index');
+});
+
+// admin
+Route::get('/dashboard', [ProdukController::class , 'index'])->middleware(['auth']);
+Route::get('/create-produk', [ProdukController::class , 'create'])->middleware(['auth']);
+Route::post('/dashboard', [ProdukController::class , 'store'])->middleware(['auth']);
+Route::get('/produk/{id}', [ProdukController::class , 'show'])->middleware(['auth']);
+Route::get('/produk/{id}/edit', [ProdukController::class , 'edit'])->middleware(['auth']);
+Route::put('/produk/{id}', [ProdukController::class , 'update'])->middleware(['auth']);
+Route::delete('/produk/{id}', [ProdukController::class , 'destroy'])->middleware(['auth']);
